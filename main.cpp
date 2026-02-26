@@ -49,6 +49,7 @@ int main()
     std::cout << "Atlag: " << atlag << std::endl;
 
     delete[] b;  // ❗ Memóriaszivárgás elkerülése
+    std::cout << "Radics Peti ORBÁN - A BUKÁS PARÓDIA" << std::endl;
 
     return 0;
 }
