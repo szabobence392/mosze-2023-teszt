@@ -4,44 +4,51 @@ constexpr int N_ELEMENTS = 100;
 
 int main()
 {
-    int *b = new int[NELEMENTS]; 
-    // HIBA: NELEMENTS nincs deklarálva (helyesen N_ELEMENTS lenne)
+    // ❌ Hibás konstansnév (NELEMENTS nem létezik)
+    // int *b = new int[NELEMENTS];
+    int *b = new int[N_ELEMENTS];
 
-    std::cout << '1-100 ertekek duplazasa'
-    // HIBA: hiányzó pontosvessző a sor végén
-    // HIBA: karakter literál (' ') használata string (" ") helyett
+    // ❌ Hiányzó pontosvessző, és karakter literál helyett string kell
+    // std::cout << '1-100 ertekek duplazasa'
+    std::cout << "1-100 ertekek duplazasa" << std::endl;
 
-    for (int i = 0;)
-    // HIBA: hibás for ciklus szintaxis (hiányzik a feltétel és az inkrementálás)
+    // ❌ Hibás for ciklus (nincs feltétel és nincs inkrementálás)
+    // for (int i = 0;)
+    for (int i = 0; i < N_ELEMENTS; i++)
     {
         b[i] = i * 2;
-        // HIBA: a ciklus így végtelen lenne / nem definiált működés
     }
 
-    for (int i = 0; i; i++)
-    // HIBA: a ciklus feltétele hibás (i; nem megfelelő logikai feltétel)
+    // ❌ Hibás feltétel (i; mindig igaz amíg i != 0)
+    // ❌ Hiányzó kiírandó változó és pontosvessző
+    // for (int i = 0; i; i++)
+    for (int i = 0; i < N_ELEMENTS; i++)
     {
-        std::cout << "Ertek:"
-        // HIBA: hiányzó pontosvessző
-        // HIBA: nem ír ki konkrét értéket (b[i])
+        // std::cout << "Ertek:"
+        std::cout << "Ertek: " << b[i] << std::endl;
     }    
 
     std::cout << "Atlag szamitasa: " << std::endl;
 
-    int atlag;
-    // HIBA: az atlag változó nincs inicializálva
+    // ❌ Inicializálatlan változó
+    // int atlag;
+    int atlag = 0;
 
-    for (int i = 0; i < N_ELEMENTS, i++)
-    // HIBA: vessző van pontosvessző helyett a for feltételben
+    // ❌ Hibás for szintaxis (vessző helyett pontosvessző kell)
+    // ❌ Hiányzó ciklusblokk kapcsos zárójel
+    // for (int i = 0; i < N_ELEMENTS, i++)
+    for (int i = 0; i < N_ELEMENTS; i++)
     {
-        atlag += b[i]
-        // HIBA: hiányzó pontosvessző
-        // HIBA: nem inicializált változóhoz adunk hozzá
+        // ❌ Hiányzó pontosvessző
+        // atlag += b[i]
+        atlag += b[i];
     }
 
     atlag /= N_ELEMENTS;
 
     std::cout << "Atlag: " << atlag << std::endl;
+
+    delete[] b;  // ❗ Memóriaszivárgás elkerülése
 
     return 0;
 }
